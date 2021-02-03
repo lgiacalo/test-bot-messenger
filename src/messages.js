@@ -7,7 +7,6 @@ function callSendAPI(messageData) {
     {
       uri: 'https://graph.facebook.com/v2.6/me/messages',
       qs: { access_token: TOKEN_PAGE_FACEBOOK_MESSENGER },
-      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       method: 'POST',
       json: messageData,
     },

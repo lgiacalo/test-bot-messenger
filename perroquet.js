@@ -28,7 +28,7 @@ app.post('/webhook', (req, res) => {
   if (data.object === 'page') {
     data.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
-        if (event.message) {
+        if (event.message[0]) {
           handleMessage(event);
         } else {
           console.log('Webhook received unknown event: ', event);
