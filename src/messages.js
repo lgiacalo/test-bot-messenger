@@ -41,7 +41,31 @@ function formatMessageData(recipientId, messageText) {
 }
 
 function sendHowAreYouMessage(recipientId) {
-  const messageData = formatMessageData(recipientId, 'OUaip nickel');
+  const response = {
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: [
+          {
+            buttons: [
+              {
+                type: 'postback',
+                title: 'Yes!',
+                payload: 'yes',
+              },
+              {
+                type: 'postback',
+                title: 'No!',
+                payload: 'no',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  const messageData = formatMessageData(recipientId, response);
 
   callSendAPI(messageData);
 }
