@@ -21,9 +21,9 @@ function callSendAPI(messageData) {
           recipientId,
         );
       } else {
-        console.error(`Unable to send message: ${error}`);
-        // console.error(response);
-        // console.error(error);
+        console.error('Unable to send message');
+        console.error(response);
+        console.error(error);
       }
     },
   );
@@ -35,7 +35,7 @@ function formatMessageDataText(recipientId, messageText) {
       id: recipientId,
     },
     message: {
-      text: `${messageText} GRRR`,
+      text: messageText,
     },
   };
 }
