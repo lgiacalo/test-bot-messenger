@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { TOKEN_FACEBOOK } = require('./config');
-const { receivedMessage } = require('./utils');
+const { handleMessage } = require('./utils');
 
 const app = express();
 
@@ -35,13 +35,10 @@ app.post('/webhook', (req, res) => {
       const senderPsid = webhookEvent.sender.id;
       console.log(`Sender PSID: ${senderPsid}`);
 
-      const pageID = entry.id;
-      const timeOfEvent = entry.time;
-
       // Iterate over each messaging event
       entry.messaging.forEach((event) => {
         if (event.message) {
-          receivedMessage(event);
+          handleMessage(event);
         } else {
           console.log('Webhook received unknown event: ', event);
         }

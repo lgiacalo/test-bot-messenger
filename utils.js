@@ -46,7 +46,7 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-function receivedMessage(event) {
+function handleMessage(event) {
   const senderID = event.sender.id;
   const recipientID = event.recipient.id;
   const timeOfMessage = event.timestamp;
@@ -62,25 +62,22 @@ function receivedMessage(event) {
 
   const messageId = message.mid;
 
-  const messageText = message.text;
-  const messageAttachments = message.attachments;
-
-  if (messageText) {
+  if (message.text) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
-    switch (messageText) {
+    switch (message.text) {
       case 'generic':
         sendGenericMessage(senderID);
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(senderID, message.text);
     }
-  } else if (messageAttachments) {
+  } else if (message.attachments) {
     sendTextMessage(senderID, 'Message with attachment received');
   }
 }
 
 module.exports = {
-  receivedMessage,
+  handleMessage,
 };
