@@ -21,7 +21,7 @@ function callSendAPI(messageData) {
           recipientId,
         );
       } else {
-        console.error('Unable to send message !');
+        console.error(`Unable to send message: ${error}`);
         // console.error(response);
         // console.error(error);
       }
@@ -42,28 +42,19 @@ function formatMessageData(recipientId, messageText) {
 
 function sendHowAreYouMessage(recipientId) {
   const response = {
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'generic',
-        elements: [
-          {
-            buttons: [
-              {
-                type: 'postback',
-                title: 'Yes!',
-                payload: 'yes',
-              },
-              {
-                type: 'postback',
-                title: 'No!',
-                payload: 'no',
-              },
-            ],
-          },
-        ],
+    text: 'Très bien et vous ?',
+    quick_replies: [
+      {
+        content_type: 'text',
+        title: 'Je vais bien, merci',
+        payload: 'Good',
       },
-    },
+      {
+        content_type: 'text',
+        title: 'Non, ça ne va pas',
+        payload: 'Bad',
+      },
+    ],
   };
   const messageData = formatMessageData(recipientId, response);
 
