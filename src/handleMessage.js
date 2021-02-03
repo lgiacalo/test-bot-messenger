@@ -22,7 +22,10 @@ function handleMessage(event) {
     const regex = /.*comment( +)((c|ç)a)*( *)va(.*)/g;
 
     if (message.text.toLowerCase().match(regex)) sendHowAreYouMessage(senderID);
-    else sendTextMessage(senderID, message.text);
+    else if (message.quick_reply) {
+      const msg = message.quick_reply === 'Good' ? '😁 👍' : '😢';
+      sendTextMessage(senderID, msg);
+    } else sendTextMessage(senderID, message.text);
   } else if (message.attachments)
     sendTextMessage(senderID, 'Message with attachment received');
 }
