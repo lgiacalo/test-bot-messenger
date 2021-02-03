@@ -35,7 +35,7 @@ function formatMessageDataText(recipientId, messageText) {
       id: recipientId,
     },
     message: {
-      text: messageText,
+      text: `${messageText} GRRR`,
     },
   };
 }
