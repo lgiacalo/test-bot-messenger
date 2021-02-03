@@ -29,24 +29,13 @@ function callSendAPI(messageData) {
   );
 }
 
-function sendResponse(recipientId, response) {
+function sendResponse(recipientId, message) {
   callSendAPI({
     recipient: {
       id: recipientId,
     },
-    message: response,
+    message,
   });
-}
-
-function formatMessageDataText(recipientId, messageText) {
-  return {
-    recipient: {
-      id: recipientId,
-    },
-    message: {
-      text: messageText,
-    },
-  };
 }
 
 function sendHowAreYouMessage(recipientId) {
@@ -70,9 +59,7 @@ function sendHowAreYouMessage(recipientId) {
 }
 
 function sendTextMessage(recipientId, messageText) {
-  const messageData = formatMessageDataText(recipientId, messageText);
-
-  callSendAPI(messageData);
+  sendResponse(recipientId, { text: messageText });
 }
 
 module.exports = {

@@ -22,7 +22,7 @@ function handleMessage(event) {
   const messageAttachments = message.attachments;
 
   if (messageAttachments && messageAttachments[0].type === 'image') {
-    sendTextMessage(senderID, 'Je ne sais pas traiter ce type dedemande.');
+    sendTextMessage(senderID, 'Je ne sais pas traiter ce type de demande.');
   } else if (messageText) {
     const regex = /.*comment( +)va(s?)( |-)tu/g;
 
