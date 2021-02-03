@@ -25,10 +25,16 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   const data = req.body;
 
-  // Make sure this is a page subscription
   if (data.object === 'page') {
-    // Iterate over each entry - there may be multiple if batched
     data.entry.forEach((entry) => {
+      // Gets the body of the webhook event
+      const webhookEvent = entry.messaging[0];
+      console.log(webhookEvent);
+
+      // Get the sender PSID
+      const senderPsid = webhookEvent.sender.id;
+      console.log(`Sender PSID: ${senderPsid}`);
+
       const pageID = entry.id;
       const timeOfEvent = entry.time;
 
@@ -42,11 +48,9 @@ app.post('/webhook', (req, res) => {
       });
     });
 
-    // Assume all went well.
-    //
-    // You must send back a 200, within 20 seconds, to let us know
-    // you've successfully received the callback. Otherwise, the request
-    // will time out and we will keep trying to resend.
     res.sendStatus(200);
+  } else {
+    // Return a '404 Not Found' if event is not from a page subscription
+    res.sendStatus(404);
   }
 });
