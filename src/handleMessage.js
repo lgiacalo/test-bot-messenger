@@ -33,6 +33,7 @@ function handleMessage(event) {
     } else sendTextMessage(senderID, messageText);
   } else {
     console.log('message :>> ', message);
+    console.log('message.attachments :>> ', message.attachments);
     sendResponse(senderID, message);
   }
 }
