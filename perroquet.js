@@ -35,13 +35,13 @@ app.post('/webhook', (req, res) => {
       const senderPsid = webhookEvent.sender.id;
       console.log(`Sender PSID: ${senderPsid}`);
 
-      // entry.messaging.forEach((event) => {
-      if (webhookEvent.message) {
-        handleMessage(webhookEvent);
-      } else {
-        console.log(`Webhook received unknown event: ${webhookEvent}`);
-      }
-      // });
+      entry.messaging.forEach((event) => {
+        if (event.message) {
+          handleMessage(event);
+        } else {
+          console.log(`Webhook received unknown event: ${event}`);
+        }
+      });
     });
 
     res.sendStatus(200);
