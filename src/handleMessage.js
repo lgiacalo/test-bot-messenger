@@ -17,17 +17,17 @@ function handleMessage(event) {
   const messageId = message.mid;
 
   if (message.text) {
-    // If we receive a text message, check to see if it matches a keyword
-    // and send back the example. Otherwise, just echo the text we received.
-    const regex = /.*comment( +)((c|ç)a)*( *)va(.*)/g;
+    const regex = /.*comment( +)va(s?)( |-)tu/g;
 
     if (message.text.toLowerCase().match(regex)) sendHowAreYouMessage(senderID);
     else if (message.quick_reply) {
       const msg = message.quick_reply.payload === 'Good' ? '😁 👍' : '😢';
       sendTextMessage(senderID, msg);
     } else sendTextMessage(senderID, message.text);
-  } else if (message.attachments)
-    sendTextMessage(senderID, 'Message with attachment received');
+  } else if (message.attachments) {
+    console.log('message.attachments :>> ', message.attachments);
+    sendTextMessage(senderID, 'Je ne sais pas traiter ce type dedemande.');
+  }
 }
 
 module.exports = {
