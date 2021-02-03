@@ -23,6 +23,7 @@ function handleMessage(event) {
 
     if (message.text.toLowerCase().match(regex)) sendHowAreYouMessage(senderID);
     else if (message.quick_reply) {
+      console.log('message.quick_reply :>> ', message.quick_reply);
       const msg = message.quick_reply === 'Good' ? '😁 👍' : '😢';
       sendTextMessage(senderID, msg);
     } else sendTextMessage(senderID, message.text);
