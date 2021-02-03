@@ -14,18 +14,18 @@ function handleMessage(event) {
   );
   console.log(JSON.stringify(message));
 
-  const messageId = message.mid;
+  const messageText = message.text;
+  const messageAttachments = message.attachments;
 
-  if (message.text) {
+  if (messageText) {
     const regex = /.*comment( +)va(s?)( |-)tu/g;
 
-    if (message.text.toLowerCase().match(regex)) sendHowAreYouMessage(senderID);
+    if (messageText.toLowerCase().match(regex)) sendHowAreYouMessage(senderID);
     else if (message.quick_reply) {
       const msg = message.quick_reply.payload === 'Good' ? '😁 👍' : '😢';
       sendTextMessage(senderID, msg);
-    } else sendTextMessage(senderID, message.text);
-  } else if (message.attachments) {
-    console.log('message.attachments :>> ', message.attachments);
+    } else sendTextMessage(senderID, messageText);
+  } else if (messageAttachments && messageAttachments[0].type === 'image') {
     sendTextMessage(senderID, 'Je ne sais pas traiter ce type dedemande.');
   }
 }
