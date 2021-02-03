@@ -29,6 +29,15 @@ function callSendAPI(messageData) {
   );
 }
 
+function sendResponse(recipientId, response) {
+  callSendAPI({
+    recipient: {
+      id: recipientId,
+    },
+    message: response,
+  });
+}
+
 function formatMessageDataText(recipientId, messageText) {
   return {
     recipient: {
@@ -57,12 +66,7 @@ function sendHowAreYouMessage(recipientId) {
     ],
   };
 
-  callSendAPI({
-    recipient: {
-      id: recipientId,
-    },
-    message: response,
-  });
+  sendResponse(recipientId, response);
 }
 
 function sendTextMessage(recipientId, messageText) {
@@ -74,4 +78,5 @@ function sendTextMessage(recipientId, messageText) {
 module.exports = {
   sendHowAreYouMessage,
   sendTextMessage,
+  sendResponse,
 };

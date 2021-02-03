@@ -1,4 +1,8 @@
-const { sendTextMessage, sendHowAreYouMessage } = require('./messages');
+const {
+  sendTextMessage,
+  sendHowAreYouMessage,
+  sendResponse,
+} = require('./messages');
 
 function handleMessage(event) {
   const senderID = event.sender.id;
@@ -17,7 +21,9 @@ function handleMessage(event) {
   const messageText = message.text;
   const messageAttachments = message.attachments;
 
-  if (messageText) {
+  if (messageAttachments && messageAttachments[0].type === 'image') {
+    sendTextMessage(senderID, 'Je ne sais pas traiter ce type dedemande.');
+  } else if (messageText) {
     const regex = /.*comment( +)va(s?)( |-)tu/g;
 
     if (messageText.toLowerCase().match(regex)) sendHowAreYouMessage(senderID);
@@ -25,9 +31,7 @@ function handleMessage(event) {
       const msg = message.quick_reply.payload === 'Good' ? '😁 👍' : '😢';
       sendTextMessage(senderID, msg);
     } else sendTextMessage(senderID, messageText);
-  } else if (messageAttachments && messageAttachments[0].type === 'image') {
-    sendTextMessage(senderID, 'Je ne sais pas traiter ce type dedemande.');
-  }
+  } else sendResponse(senderID, message);
 }
 
 module.exports = {
