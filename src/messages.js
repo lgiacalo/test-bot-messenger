@@ -22,7 +22,7 @@ function callSendAPI(messageData) {
         );
       } else {
         console.error(`Unable to send message: ${error}`);
-        console.error(`Response: ${response}`);
+        console.error(response);
         // console.error(error);
       }
     },
