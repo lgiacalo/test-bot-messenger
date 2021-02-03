@@ -31,7 +31,10 @@ function handleMessage(event) {
       const msg = message.quick_reply.payload === 'Good' ? '😁 👍' : '😢';
       sendTextMessage(senderID, msg);
     } else sendTextMessage(senderID, messageText);
-  } else sendResponse(senderID, message);
+  } else {
+    console.log('message :>> ', message);
+    sendResponse(senderID, message);
+  }
 }
 
 module.exports = {
