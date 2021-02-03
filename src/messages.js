@@ -29,12 +29,8 @@ function callSendAPI(messageData) {
   );
 }
 
-function sendGenericMessage(recipientId, messageText) {
-  // To be expanded in later sections
-}
-
-function sendTextMessage(recipientId, messageText) {
-  const messageData = {
+function formatMessageData(recipientId, messageText) {
+  return {
     recipient: {
       id: recipientId,
     },
@@ -42,11 +38,21 @@ function sendTextMessage(recipientId, messageText) {
       text: messageText,
     },
   };
+}
+
+function sendHowAreYouMessage(recipientId) {
+  const messageData = formatMessageData(recipientId, 'OUaip nickel');
+
+  callSendAPI(messageData);
+}
+
+function sendTextMessage(recipientId, messageText) {
+  const messageData = formatMessageData(recipientId, messageText);
 
   callSendAPI(messageData);
 }
 
 module.exports = {
+  sendHowAreYouMessage,
   sendTextMessage,
-  sendGenericMessage,
 };
