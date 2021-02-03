@@ -1,5 +1,5 @@
 const request = require('request');
-const { TOKEN_PAGE_FACEBOOK_MESSENGER } = require('./config');
+const { TOKEN_PAGE_FACEBOOK_MESSENGER } = require('../config');
 
 function callSendAPI(messageData) {
   console.log('messageData :>> ', messageData);
