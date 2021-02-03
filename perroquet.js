@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { TOKEN_FACEBOOK } = require('./config');
-const { handleMessage } = require('./utils');
+const { handleMessage } = require('./src/handleMessage');
 
 const app = express();
 
@@ -27,15 +27,6 @@ app.post('/webhook', (req, res) => {
 
   if (data.object === 'page') {
     data.entry.forEach((entry) => {
-      // Gets the body of the webhook event
-      const webhookEvent = entry.messaging[0];
-      console.log(webhookEvent);
-
-      // Get the sender PSID
-      const senderPsid = webhookEvent.sender.id;
-      console.log(`Sender PSID: ${senderPsid}`);
-
-      // Iterate over each messaging event
       entry.messaging.forEach((event) => {
         if (event.message) {
           handleMessage(event);
