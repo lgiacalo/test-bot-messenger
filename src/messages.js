@@ -30,7 +30,7 @@ function callSendAPI(messageData) {
   );
 }
 
-function formatMessageData(recipientId, messageText) {
+function formatMessageDataText(recipientId, messageText) {
   return {
     recipient: {
       id: recipientId,
@@ -57,13 +57,17 @@ function sendHowAreYouMessage(recipientId) {
       },
     ],
   };
-  const messageData = formatMessageData(recipientId, response);
 
-  callSendAPI(messageData);
+  callSendAPI({
+    recipient: {
+      id: recipientId,
+    },
+    message: response,
+  });
 }
 
 function sendTextMessage(recipientId, messageText) {
-  const messageData = formatMessageData(recipientId, messageText);
+  const messageData = formatMessageDataText(recipientId, messageText);
 
   callSendAPI(messageData);
 }
