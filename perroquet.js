@@ -26,9 +26,9 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   const data = req.body;
 
-  if (data.object === 'page') {
-    data.entry.forEach((entry) => {
-      entry.messaging.forEach((event) => {
+  if (data?.object === 'page') {
+    data.entry?.forEach((entry) => {
+      entry.messaging?.forEach((event) => {
         if (event.message) {
           handleMessage(event);
         } else {
