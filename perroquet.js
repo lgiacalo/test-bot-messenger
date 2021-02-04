@@ -28,14 +28,6 @@ app.post('/webhook', (req, res) => {
 
   if (data.object === 'page') {
     data.entry.forEach((entry) => {
-      // Gets the body of the webhook event
-      const webhookEvent = entry.messaging[0];
-      console.log(webhookEvent.messaging);
-
-      // Get the sender PSID
-      const senderPsid = webhookEvent.sender.id;
-      console.log(`Sender PSID: ${senderPsid}`);
-
       entry.messaging.forEach((event) => {
         if (event.message) {
           handleMessage(event);
@@ -47,7 +39,6 @@ app.post('/webhook', (req, res) => {
 
     res.sendStatus(200);
   } else {
-    // Return a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
 });
