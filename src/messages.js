@@ -5,7 +5,7 @@ function callSendAPI(messageData) {
   console.log('messageData :>> ', messageData);
   request(
     {
-      uri: 'https://graph.facebook.com/v2.6/me/messages',
+      uri: 'https://graph.facebook.com/v9.0/me/messages',
       qs: { access_token: TOKEN_PAGE_FACEBOOK_MESSENGER },
       method: 'POST',
       json: messageData,
