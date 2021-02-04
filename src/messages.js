@@ -1,6 +1,10 @@
 const request = require('request');
 const { TOKEN_PAGE_FACEBOOK_MESSENGER } = require('../config');
 
+function tryGetInfoWithMid({ recipient: { id }, message: { mid } }) {
+  console.log('{id, mid} :>> ', { id, mid });
+}
+
 function callSendAPI(messageData) {
   console.log('messageData :>> ', messageData);
   request(
@@ -20,6 +24,7 @@ function callSendAPI(messageData) {
           messageId,
           recipientId,
         );
+        tryGetInfoWithMid(messageData);
       } else {
         console.error('Unable to send message');
         // console.error(error);
