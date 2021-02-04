@@ -2,12 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { TOKEN_FACEBOOK } = require('./config');
 const { handleMessage } = require('./src/handleMessage');
+const { PORT } = require('./config');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.listen(process.env.PORT || 3000);
+app.listen(PORT);
 
 app.get('/', (_req, res) => {
   res.send('Je suis le serveur du bot Perroquet !');
