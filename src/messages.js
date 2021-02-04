@@ -15,7 +15,7 @@ function tryGetInfoWithMid({ recipient: { id }, message: { mid } }) {
     },
     (error, response, body) => {
       if (!error && response.statusCode === 200) {
-        console.log('body GETT :>> ', body);
+        console.log('body :>> ', body);
       } else {
         console.error('Unable to get !');
         // console.error(error);

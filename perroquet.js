@@ -11,7 +11,9 @@ app.use(bodyParser.json());
 app.listen(PORT);
 
 app.get('/', (_req, res) => {
-  res.send('Je suis le serveur du bot Perroquet !');
+  res.send(
+    'Je suis le serveur du bot Perroquet ! https://www.facebook.com/botTestLgiacalo',
+  );
 });
 
 // Facebook Webhook
